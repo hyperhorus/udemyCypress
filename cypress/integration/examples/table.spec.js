@@ -6,7 +6,11 @@ describe("Testing EA App", () =>{
 
         cy.visit("http://eaapp.somee.com/");
         
-        cy.contains("Login").click();
+        //cy.contains("Login").click();
+        cy.get("#loginLink").then(($link) => {
+            const linkText = $link.text();
+            expect(linkText).is.eql('Login');
+        }).click();
 
         cy.url().should("include", "/Account/Login");
 
