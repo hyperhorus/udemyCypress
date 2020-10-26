@@ -2,6 +2,16 @@
 
 describe("Testing EA App", () =>{
     
+    it.only('Testing assertions in EA', () => {
+        cy.visit('https://executeautomation.com/');
+        //cy.get("h6").should('have.class', 'Countries');
+
+        cy.get("h6").should(($x) => {
+            expect($x).to.have.class('Countries');
+
+        })  
+
+    })
     
     it('Login operation', () =>{
 
@@ -37,13 +47,15 @@ describe("Testing EA App", () =>{
 
         cy.get('.table').find('tr').as("rows");
 
-        cy.get("@rows").then(($row) =>{
-            cy.wrap($row).click({multiple:true});
+        // cy.get("@rows").then(($row) =>{
+        //     cy.wrap($row).click({multiple:true});
+        // })
+
+        //cy.wrap({name:'Karthik'}).should('have.property', 'name').and('eq','Karthik');
+
+        //Using wrap
+        cy.get('.table').find('tr > td').then(($td) =>{
+            cy.wrap($td).contains("John").invoke("wrap").parent().contains("Benefits").click()
         })
-
-
-
-
-
     })
 })
